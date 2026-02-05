@@ -1,9 +1,13 @@
 import mariadb from "mariadb";
+import { createRequire } from "module";
+const require = createRequire(import.meta.url);
+
+require('dotenv').config();
 
 const pool = mariadb.createPool({
-host: "localhost",
-user: "root",
-password: "Bowser2013",
-database: "civelampus",
-connectionLimit: 10,
+host: process.env.HOST,
+user: process.env.USER,
+password: process.env.PASSWORD,
+database: process.env.DATABASE,
+connectionLimit: process.env.CONNECTION_LIMIT,
 });
