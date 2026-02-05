@@ -82,7 +82,7 @@ export async function updateStudent(mail, annees, telephone, adresse1, adresse2,
 //await findAllStudents();
 //await findStudentById(2);
 //await addStudent("CI-29007", "Humfryes", "Matt", "matt.humfryes@civelampus.com", 4, "0600000088", "9 rue Omega", null, 18282, "City", "Bac+3", 3);
-await updateStudent("matt.humfryes@civelampus.fr", 5, "0600000088", "9 rue Omega", null, 18282, "Town", "Bac+5", 10)
+//await updateStudent("matt.humfryes@civelampus.fr", 5, "0600000088", "9 rue Omega", null, 18282, "Town", "Bac+5", 10)
 
 export async function findAllCours() {
     let conn;
