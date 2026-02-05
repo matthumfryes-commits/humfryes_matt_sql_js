@@ -72,6 +72,47 @@ export async function findCoursById(id) {
     }
 }
 
+export async function addCours(semaine, thematique, taux, heure, disciplineId, intervenantId, salleId) {
+    const conn = await pool.getConnection();
+    try 
+    {
+        await conn.beginTransaction();
+        await conn.query("INSERT INTO cours (cours_numero_semaine, cours_thematique, cours_taux_horaire, cours_total_heures_semaine, discipline_Id, intervenant_siret, salle_Id) VALUES (?, ?, ?, ?, ?, ?, ?)",[semaine, thematique, taux, heure, disciplineId, intervenantId, salleId],);
+        await conn.commit();
+    } 
+    catch (err) 
+    {
+        await conn.rollback();
+        throw err;
+    } 
+    finally 
+    {
+        conn.release();
+    }
+}
+
+export async function updateCours(semaine, thematique, taux, heure, id) {
+    const conn = await pool.getConnection();
+    try 
+    {
+        await conn.beginTransaction();
+        await conn.query("UPDATE cours SET cours_numero_semaine = ?, cours_thematique = ?, cours_taux_horaire = ?, cours_total_heures_semaine = ? WHERE cours_Id = ?",[semaine, thematique, taux, heure, id],);
+        await conn.commit();
+    } 
+    catch (err) 
+    {
+        await conn.rollback();
+        throw err;
+    } 
+    finally 
+    {
+        conn.release();
+    }
+}
+
 await findCoursById(1);
+await findAllCours();
+await addCours(13, "GIT", 60, 14, 6, "11111111111111", 3);
+await updateCours(14, "Java", 65, 16, 11);
 
 pool.end();
