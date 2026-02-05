@@ -155,4 +155,20 @@ export async function updateCours(semaine, thematique, taux, heure, id) {
 //await addCours(13, "GIT", 60, 14, 6, "11111111111111", 3);
 //await updateCours(14, "Java", 65, 16, 11);
 
+export async function findStudentsWithCours() {
+    let conn;
+    try 
+    {
+        conn = await pool.getConnection();
+        const rows = await conn.query("SELECT e.etudiant_nom, e.etudiant_prenom, e.etudiant_email FROM etudiant e INNER JOIN assister a ON e.etudiant_Id = a.etudiant_Id INNER JOIN cours c ON a.cours_Id = c.cours_Id");
+        return rows ?? null;
+    } 
+    finally 
+    {
+        if(conn) conn.release();
+    }
+}
+
+//await findStudentsWithCours();
+
 pool.end();
