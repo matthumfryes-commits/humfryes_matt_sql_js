@@ -160,7 +160,7 @@ export async function findStudentsWithCours() {
     try 
     {
         conn = await pool.getConnection();
-        const rows = await conn.query("SELECT e.etudiant_nom, e.etudiant_prenom, e.etudiant_email FROM etudiant e INNER JOIN assister a ON e.etudiant_Id = a.etudiant_Id INNER JOIN cours c ON a.cours_Id = c.cours_Id");
+        const rows = await conn.query("SELECT e.etudiant_nom, e.etudiant_prenom, e.etudiant_email, c.cours_thematique FROM etudiant e INNER JOIN assister a ON e.etudiant_Id = a.etudiant_Id INNER JOIN cours c ON a.cours_Id = c.cours_Id");
         return rows ?? null;
     } 
     finally 
@@ -169,6 +169,6 @@ export async function findStudentsWithCours() {
     }
 }
 
-//await findStudentsWithCours();
+await findStudentsWithCours();
 
 pool.end();
